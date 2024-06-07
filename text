@@ -1,0 +1,73 @@
+ for venet modal open 
+ \
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Event Details</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body d-flex justify-content-around">
+                <h2><?php echo $row['etitle'] ?></h2>
+                <!-- Display the countdown timer in an element -->
+                <p id="demo">
+                    <?php
+                     // PHP code to calculate the initial countdown
+                     $eventDate = strtotime("Mar 20, 2024 12:00:00");
+                     echo date("M d, Y H:i:s", $eventDate); // Display the event date
+                     ?>
+                </p>
+
+                <script>
+                // Set the date we're counting down to
+                var countDownDate = new Date("<?php echo date("M d, Y H:i:s", $eventDate); ?>").getTime();
+
+                // Update the count down every 1 second
+                var x = setInterval(function() {
+
+                    // Get today's date and time
+                    var now = new Date().getTime();
+
+                    // Find the distance between now and the count down date
+                    var distance = countDownDate - now;
+
+                    // Time calculations for days, hours, minutes and seconds
+                    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                    // Display the result in the element with id="demo"
+                    document.getElementById("demo").innerHTML = days + "d " + hours + "h " +
+                        minutes + "m " + seconds + "s ";
+
+                    // If the count down is finished, write some text
+                    if (distance < 0) {
+                        clearInterval(x);
+                        document.getElementById("demo").innerHTML = "EXPIRED";
+                    }
+                }, 1000);
+                </script>
+
+            </div>
+            <div class="img" style="  margin: auto;">
+                <?php
+echo "<img src='/project/Restaurant/admin/upload2/" . $row['eimg'] . "' alt='" . $row['etitle'] . "' height='400px' width='350px' style='margin-bottom: 10px;'>";
+?>
+
+            </div>
+            <div class="txt" style="margin:auto; align-items:center;">
+                <p><?php echo $row['eoffer']  ?></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Add your JavaScript code here to handle event filtering and modal display -->
